@@ -23,3 +23,10 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
+    - name: Check my-json-server
+      uses: 3sky/glowing-spoon@v0.0.1
+      with:
+        hostname: 'https://flightsimulator.azurewebsites.net'
+        path: '/airport/bll'
+        filter: '.iata'
+        expected: 'BLL'
