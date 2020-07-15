@@ -10,48 +10,48 @@ using Microsoft.Extensions.Logging;
 
 namespace FlightSimulator.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class AirportController : ControllerBase
+    [ApiController]
+    public class AircraftController : ControllerBase
     {
-        private readonly IAirportService airportService;
-        private readonly ILogger<AirportService> logger;
+        private readonly IAircraftService AircraftService;
+        private readonly ILogger<AircraftService> logger;
 
-        public AirportController(IAirportService airportService, ILogger<AirportService> logger)
+        public AircraftController(IAircraftService AircraftService, ILogger<AircraftService> logger)
         {
-            this.airportService = airportService;
+            this.AircraftService = AircraftService;
             this.logger = logger;
         }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<IList<Airport>> Get()
+        public ActionResult<IList<Aircraft>> Get()
         {
             try
             {
-                return Ok(airportService.Get());
+                return Ok(AircraftService.Get());
             }
             catch (Exception ex)
             {
-                logger.LogError(1, ex, "Get airports");
+                logger.LogError(1, ex, "Get Aircrafts");
                 return BadRequest();
             }
         }
 
-        [HttpGet("{iataCode}")]
+        [HttpGet("{model}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Airport> Get(string iataCode)
+        public ActionResult<Aircraft> Get(string model)
         {
             try
             {
-                return Ok(airportService.GetByIataCode(iataCode));
+                return Ok(AircraftService.GetByModel(model));
             }
             catch (Exception ex)
             {
-                logger.LogError(1, ex, "No airport found with iATA code {1}", iataCode);
-                return NotFound($"No airport found with iATA code {iataCode}");
+                logger.LogError(1, ex, "No aircraft found with model {1}", model);
+                return NotFound($"No aircraft found with model {model}");
             }
         }
 
@@ -59,13 +59,13 @@ namespace FlightSimulator.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Airport> Put([FromBody] Airport airport)
+        public ActionResult<Aircraft> Put([FromBody] Aircraft aircraft)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    airportService.Update(airport);
+                    AircraftService.Update(aircraft);
                     return Ok();
                 }
                 else
@@ -76,22 +76,22 @@ namespace FlightSimulator.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError(1, ex, "No airport found with iATA code {1}", airport.IataCode);
-                return NotFound($"No airport found with iATA code {airport.IataCode}");
+                logger.LogError(1, ex, "No aircraft found with model {1}", aircraft.Model);
+                return NotFound($"No aircraft found with model {aircraft.Model}");
             }
         }
 
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Airport> Post([FromBody] Airport airport)
+        public ActionResult<Aircraft> Post([FromBody] Aircraft Aircraft)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    airportService.Create(airport);
-                    return CreatedAtAction(nameof(Get), new { iataCode = airport.IataCode }, airport);
+                    AircraftService.Create(Aircraft);
+                    return CreatedAtAction(nameof(Get), new { model = Aircraft.Model }, Aircraft);
                 }
                 else
                 {
@@ -101,25 +101,25 @@ namespace FlightSimulator.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError(1, ex, "No airport found with iATA code {1}", airport.IataCode);
-                return NotFound($"No airport found with iATA code {airport.IataCode}");
+                logger.LogError(1, ex, "No aircraft found with model {1}", Aircraft.Model);
+                return NotFound($"No aircraft found with model {Aircraft.Model}");
             }
         }
 
-        [HttpDelete("{iataCode}")]
+        [HttpDelete("{model}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult Delete(string iataCode)
+        public ActionResult Delete(string model)
         {
             try
             {
-                airportService.Delete(iataCode);
+                AircraftService.Delete(model);
                 return Ok();
             }
             catch (Exception ex)
             {
-                logger.LogError(1, ex, "No airport found with iATA code {1}", iataCode);
-                return NotFound($"No airport found with iATA code {iataCode}");
+                logger.LogError(1, ex, "No Aircraft found with iATA code {1}", model);
+                return NotFound($"No Aircraft found with iATA code {model}");
             }
         }
     }

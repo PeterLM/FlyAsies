@@ -29,7 +29,13 @@ namespace FlightSimulator
             services.AddControllers();
             services.AddSingleton<IStorageService, StorageService>();
             services.AddScoped<IAirportService, AirportService>();
-//            services.AddScoped<IAirCraftService, AirCraftService>();
+            services.AddScoped<IAircraftService, AircraftService>();
+            services.AddScoped<ISimulationService, SimulationService>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Flight simulator API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +45,16 @@ namespace FlightSimulator
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Flight simulator API V1");
+            });
 
             app.UseHttpsRedirection();
 

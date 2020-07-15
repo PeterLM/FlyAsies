@@ -1,21 +1,14 @@
-﻿using FlightSimulator.Services.Models;
+﻿using FlightSimulator.Services;
+using FlightSimulator.Services.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace FlightSimulator.Services
+namespace FlightSimulatorTests
 {
-    public interface IStorageService
+    internal class TestStorageService : IStorageService
     {
-        List<Aircraft> Aircrafts { get; }
-        List<Airport> Airports { get; }
-    }
-
-    internal class StorageService : IStorageService
-    {
-        public StorageService()
+        public TestStorageService()
         {
             this.Airports.Add(new Airport { IataCode = "BLL", Name = "Billund", Latitude = 55.743541, Longitude = 9.147464 });
             this.Airports.Add(new Airport { IataCode = "LHR", Name = "London Heathrow", Latitude = 51.476885, Longitude = -0.461136 });
@@ -28,5 +21,6 @@ namespace FlightSimulator.Services
 
         public List<Airport> Airports { get; private set; } = new List<Airport>();
         public List<Aircraft> Aircrafts { get; private set; } = new List<Aircraft>();
+
     }
 }
