@@ -27,6 +27,6 @@ jobs:
       uses: 3sky/glowing-spoon@v0.0.1
       with:
         hostname: 'flightsimulator.azurewebsites.net'
-        path: '/airport/bll'
-        filter: '.name'
-        expected: 'Billund'
+        path: '/api/simulation/bll/lhr/concorde'
+        filter: '.distance'
+        expected: 790
