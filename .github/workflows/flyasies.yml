@@ -29,4 +29,4 @@ jobs:
         hostname: 'flightsimulator.azurewebsites.net'
         path: '/api/simulation/bll/lhr/concorde'
         filter: '.distance'
-        expected: 790
+        expected: '790'
