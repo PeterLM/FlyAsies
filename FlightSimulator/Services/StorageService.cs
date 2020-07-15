@@ -24,6 +24,7 @@ namespace FlightSimulator.Services
             this.Aircrafts.Add(new Aircraft { Fuel = 500, FuelConsumption = 50, Model = "Sesna", Speed = 350, Type = AircraftTypes.Privatfly });
             this.Aircrafts.Add(new Aircraft { Fuel = 3000, FuelConsumption = 200, Model = "Mig", Speed = 2000, Type = AircraftTypes.Jagerfly });
             this.Aircrafts.Add(new Aircraft { Fuel = 25000, FuelConsumption = 400, Model = "Concorde", Speed = 1500, Type = AircraftTypes.Passagerfly });
+            this.Aircrafts.Add(new Aircraft { Fuel = 0, FuelConsumption = 0, Model = "Svæv", Speed = 150, Type = AircraftTypes.Svævefly });
         }
 
         public List<Airport> Airports { get; private set; } = new List<Airport>();
