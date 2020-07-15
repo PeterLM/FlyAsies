@@ -101,8 +101,8 @@ namespace FlightSimulator.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError(1, ex, "No airport found with iATA code {1}", airport.IataCode);
-                return NotFound($"No airport found with iATA code {airport.IataCode}");
+                logger.LogError(1, ex, "Post airport");
+                return NotFound(ex.Message);
             }
         }
 

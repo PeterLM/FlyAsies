@@ -84,14 +84,14 @@ namespace FlightSimulator.Controllers
         [HttpPost()]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<Aircraft> Post([FromBody] Aircraft Aircraft)
+        public ActionResult<Aircraft> Post([FromBody] Aircraft aircraft)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    AircraftService.Create(Aircraft);
-                    return CreatedAtAction(nameof(Get), new { model = Aircraft.Model }, Aircraft);
+                    AircraftService.Create(aircraft);
+                    return CreatedAtAction(nameof(Get), new { model = aircraft.Model }, aircraft);
                 }
                 else
                 {
@@ -101,8 +101,8 @@ namespace FlightSimulator.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError(1, ex, "No aircraft found with model {1}", Aircraft.Model);
-                return NotFound($"No aircraft found with model {Aircraft.Model}");
+                logger.LogError(ex,"Post aircraft");
+                return NotFound(ex.Message);
             }
         }
 

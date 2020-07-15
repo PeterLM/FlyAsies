@@ -44,7 +44,7 @@ namespace FlightSimulator.Services
         {
             if (storageService.Aircrafts.SingleOrDefault(c => string.Compare(c.Model, aircraft.Model, true) == 0) != null)
             {
-                throw new ArgumentException("That aircraft model {aircraft.Model} already exists.");
+                throw new ArgumentException($"Aircraft model {aircraft.Model} already exists.");
             }
             storageService.Aircrafts.Add(aircraft);
         }
