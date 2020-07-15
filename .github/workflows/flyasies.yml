@@ -23,7 +23,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
     - name: Test
       run: dotnet test --no-restore --verbosity normal
-    - name: Check simolation.
+    - name: Check simolation
       uses: 3sky/glowing-spoon@v0.0.1
       with:
         hostname: 'flightsimulator.azurewebsites.net'
